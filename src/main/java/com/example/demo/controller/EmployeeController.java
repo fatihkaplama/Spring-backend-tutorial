@@ -34,9 +34,15 @@ public class EmployeeController {
     }
 
     @PutMapping("/employee/{id}")
-    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee, @PathVariable long id){
+    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee, @PathVariable("id") long id){
         System.out.println(employee);
         System.out.println(id);
         return new ResponseEntity<Employee>(employeeService.updateEmployee(employee, id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/employee/{id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable("id") long id){
+        employeeService.deleteEmployee(id);
+        return new ResponseEntity<String>("Employee deleted successfully", HttpStatus.OK);
     }
 }
