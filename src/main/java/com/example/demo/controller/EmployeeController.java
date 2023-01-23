@@ -20,7 +20,7 @@ public class EmployeeController {
 
     @PostMapping("/employee")
     public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee){
-        return new ResponseEntity<>(employeeService.saveEmployee(employee), HttpStatus.CREATED);
+        return new ResponseEntity<Employee>(employeeService.saveEmployee(employee), HttpStatus.CREATED);
     }
 
     @GetMapping("employees")
@@ -30,6 +30,13 @@ public class EmployeeController {
 
     @GetMapping("/employee")
     public ResponseEntity<Employee> getEmployeeById(@RequestParam long id){
-        return new ResponseEntity<>(employeeService.getEmployeeById(id), HttpStatus.OK);
+        return new ResponseEntity<Employee>(employeeService.getEmployeeById(id), HttpStatus.OK);
+    }
+
+    @PutMapping("/employee/{id}")
+    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee, @PathVariable long id){
+        System.out.println(employee);
+        System.out.println(id);
+        return new ResponseEntity<Employee>(employeeService.updateEmployee(employee, id), HttpStatus.OK);
     }
 }
